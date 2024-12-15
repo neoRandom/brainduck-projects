@@ -169,7 +169,7 @@ Expected output:
 ```
 
 
-### Basic math
+### Basic loop math
 Code:
 ```
 +++[>++<-]>#
