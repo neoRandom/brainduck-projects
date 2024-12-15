@@ -190,7 +190,10 @@ operator:
     je .print_cell
 
     cmp bl, '#'      ; Case: '#' (print cell value as number)
-    je .print_debug
+    je .print_number
+
+    cmp bl, '$'      ; Case: '$' (print data pointer value)
+    je .print_address
 
     jmp .exit        ; Default
 
@@ -368,11 +371,20 @@ operator:
         jmp .exit
     
 
-    .print_debug:
+    .print_number:
         mov     rcx, data       ; Getting the cell address
         add     rcx, r14        ; Adding the offset
         xor     rax, rax        ; Zeroing the RAX register
         mov     al, byte [rcx]  ; Setting the least byte of the RAX (AL) as the cell value (8 bits)
+        call    number_to_string
+        mov     r11, rax
+        println r11
+
+        jmp .exit
+    
+
+    .print_address:
+        mov     rax, r14  ; Setting the RAX (AL) as the data pointer
         call    number_to_string
         mov     r11, rax
         println r11
