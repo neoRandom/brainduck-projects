@@ -3,7 +3,7 @@
 ;
 ; Interprets the Brainfuck code
 ; Can receive the code by shell or by file (1º argument after the executable path)
-;
+; Unfortunately it still doesn't run Mandelbrot
 
 %include "library/essential.inc"
 %include "library/math/module.inc"
@@ -16,7 +16,7 @@
 %include "library/memory/memset.inc"
 
 max_block_size  equ 32768
-max_nested_loop equ 128
+max_nested_loop equ 256
 
 
 section .data
