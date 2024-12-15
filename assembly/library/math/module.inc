@@ -11,7 +11,7 @@
 ; - RDX as the remainder
 ;
 %macro module 0
-    mov rdx, 0
+    xor rdx, rdx
     div rcx
 %endmacro
 ;

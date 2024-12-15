@@ -17,7 +17,7 @@ section .text
 ; - RAX as a pointer to the generated string
 ; - RCX as the size of the string
 ;
-_number_to_string:
+number_to_string:
     ; Initial values
     mov rcx, 10   ; Divisor
     mov r8, 0     ; Digit counter

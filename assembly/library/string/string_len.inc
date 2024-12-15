@@ -11,7 +11,7 @@ section .text
 ; INPUT: RAX as a pointer to a null-terminated string
 ; OUTPUT: RAX as the length of the string
 ;
-_string_len:
+string_len:
     ; rax = address of the string
     ; rsp[0] = counter
     push 0
