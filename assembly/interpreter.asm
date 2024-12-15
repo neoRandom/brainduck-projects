@@ -15,8 +15,8 @@
 %include "library/io/put.inc"
 %include "library/memory/memset.inc"
 
-max_block_size  equ 32768
-max_nested_loop equ 256
+max_block_size  equ 65536
+max_nested_loop equ 1024
 
 
 section .data
@@ -212,7 +212,7 @@ operator:
 
     .inc_ptr:
         ; If the instruction pointer is MAX or greater, the increment should set it to 0
-        cmp r14, max_block_size
+        cmp r14, max_block_size - 1
         jge .set_ptr_to_zero
 
         ; Else, just increase it
@@ -234,7 +234,7 @@ operator:
         jmp .exit
 
         .set_ptr_to_max:
-        mov r14, max_block_size
+        mov r14, max_block_size - 1
         jmp .exit
     
 
@@ -243,7 +243,7 @@ operator:
         cmp r12, max_nested_loop
         jge .error_max_nested_loop
 
-        ; If the current cell value is zero, jump to the next instruction and push the instruction pointer to the loop stack
+        ; If the current cell value is not zero, jump to the next instruction and push the instruction pointer to the loop stack
         cmp byte [data + r14], 0
         jnz .enter_loop
 
